@@ -1,10 +1,11 @@
 `include "maindec.sv"
 `include "aludec.sv"
+`include "opcode_decoder.sv"
+`include "instruction_decoder.sv"
+
 
 module controller (
-    input logic [6:0] op,
-    input logic [2:0] funct3,
-    input logic funct7b5,
+    input logic [31:0] Instr,
     input logic Zero,
     output logic [1:0] ResultSrc,
     output logic MemWrite,
@@ -13,13 +14,34 @@ module controller (
     output logic RegWrite,
     Jump,
     output logic [1:0] ImmSrc,
-    output logic [2:0] ALUControl
+    output logic [2:0] ALUControl,
+    output instr_type_enum instr_type_enum_inst
 );
   logic [1:0] ALUOp;
   logic Branch;
+  logic [2:0] funct3;
+  logic [4:0] rd, rs1, rs2;
+  logic [6:0] funct7;
+  logic [31:0] imm;
+
+  opcode_decoder od (
+      Instr,
+      instr_type_enum_inst
+  );
+
+  instruction_decoder id (
+      Instr,
+      instr_type_enum_inst,
+      rd,
+      funct3,
+      rs1,
+      rs2,
+      funct7,
+      imm
+  );
 
   maindec md (
-      op,
+      Instr[6:0],
       ResultSrc,
       MemWrite,
       Branch,
@@ -30,9 +52,9 @@ module controller (
       ALUOp
   );
   aludec ad (
-      op[5],
+      Instr[5],
       funct3,
-      funct7b5,
+      Instr[30],
       ALUOp,
       ALUControl
   );

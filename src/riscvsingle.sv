@@ -2,7 +2,6 @@
 import riscv_pkg::*;
 `include "controller.sv"
 `include "datapath.sv"
-`include "instruction_decoder.sv"
 
 
 module riscvsingle (
@@ -21,15 +20,8 @@ module riscvsingle (
 
   instr_type_enum instr_type_enum_inst;
 
-  instruction_decoder id (
-      Instr,
-      instr_type_enum_inst
-  );
-
   controller c (
-      Instr[6:0],
-      Instr[14:12],
-      Instr[30],
+      Instr,
       Zero,
       ResultSrc,
       MemWrite,
@@ -38,7 +30,8 @@ module riscvsingle (
       RegWrite,
       Jump,
       ImmSrc,
-      ALUControl
+      ALUControl,
+      instr_type_enum_inst
   );
   datapath dp (
       clk,

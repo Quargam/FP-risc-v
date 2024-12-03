@@ -3,7 +3,6 @@ module extend (
     input instr_type_enum instr_type_enum_inst,
     output logic [31:0] immext
 );
-  import riscv_pkg::*;
   logic [31:0] imm_i_ext, imm_s_ext, imm_b_ext, imm_j_ext;
 
   // Расчёт расширенных значений для всех типов
