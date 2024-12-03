@@ -1,5 +1,5 @@
-`include "src/controller.sv"
-`include "src/datapath.sv"
+`include "controller.sv"
+`include "datapath.sv"
 
 module riscvsingle(input logic clk, reset,
                    output logic [31:0] PC,

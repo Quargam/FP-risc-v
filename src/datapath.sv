@@ -1,10 +1,10 @@
-`include "src/flopr.sv"
-`include "src/adder.sv"
-`include "src/mux2.sv"
-`include "src/mux3.sv"
-`include "src/extend.sv"
-`include "src/regfile.sv"
-`include "src/alu.sv"
+`include "flopr.sv"
+`include "adder.sv"
+`include "mux2.sv"
+`include "mux3.sv"
+`include "extend.sv"
+`include "regfile.sv"
+`include "alu.sv"
 
 module datapath(input  logic        clk, reset,
                 input  logic [1:0]  ResultSrc,

@@ -1,6 +1,6 @@
-`include "src/riscvsingle.sv"
-`include "test/imem.sv"
-`include "test/dmem.sv"
+`include "../src/riscvsingle.sv"
+`include "imem.sv"
+`include "dmem.sv"
 
 module top(input  logic        clk, reset,
            output logic [31:0] WriteData, 

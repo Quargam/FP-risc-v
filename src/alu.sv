@@ -1,4 +1,4 @@
-`include "src/constants.sv"
+`include "constants.sv"
 
 module alu(input[31:0] SrcA, SrcB,
            input[2:0] ALUControl,

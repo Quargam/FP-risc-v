@@ -1,4 +1,4 @@
-`include "test/top.sv"
+`include "top.sv"
 
 module testbench();
   logic clk;
@@ -12,7 +12,7 @@ module testbench();
   // запуск тестбенча
   initial begin
     // Настройка вывода VCD
-    $dumpfile("testbench.vcd"); // Указание имени файла
+    $dumpfile("./build/testbench.vcd"); // Указание имени файла
     $dumpvars(0, testbench); // Запись всех сигналов тестбенча в VCD
     
     // Инициализация
