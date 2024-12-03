@@ -1,0 +1,86 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "parser_asm: add.asm",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "parser_asm",
+                "test/data/add.asm",
+                "--out",
+                "test/result/add.hex"
+            ]
+        },
+        {
+            "name": "parser_asm: addi.asm",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "parser_asm",
+                "test/data/addi.asm",
+                "--out",
+                "test/result/addi.hex"
+            ]
+        },
+        {
+            "name": "parser_asm: sw.asm",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "parser_asm",
+                "test/data/sw.asm",
+                "--out",
+                "test/result/sw.hex"
+            ]
+        },
+        {
+            "name": "parser_asm: bne.asm",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "parser_asm",
+                "test/data/bne.asm",
+                "--out",
+                "test/result/bne.hex"
+            ]
+        },
+        {
+            "name": "parser_asm: lui.asm",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "parser_asm",
+                "test/data/lui.asm",
+                "--out",
+                "test/result/lui.hex"
+            ]
+        },
+        {
+            "name": "parser_asm: jal.asm",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "parser_asm",
+                "test/data/jal.asm",
+                "--out",
+                "test/result/jal.hex"
+            ]
+        }
+    ]
+}
