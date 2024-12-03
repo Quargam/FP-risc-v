@@ -1,2 +1,5 @@
 build/
 docs/
+venv/
+__pycache__
+.mypy_cache
