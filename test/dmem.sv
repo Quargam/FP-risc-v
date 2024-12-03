@@ -1,12 +1,12 @@
 module dmem (
     input logic clk,
-    we,
-    input logic [31:0] a,
-    wd,
-    output logic [31:0] rd
+    data_mem_write_enable,
+    input logic [31:0] data_mem_address,
+    data_mem_write_data,
+    output logic [31:0] data_mem_read_data
 );
   logic [31:0] RAM[63:0];
-  assign rd = RAM[a[31:2]];  // выравнивание 
-                             // по слову
-  always_ff @(posedge clk) if (we) RAM[a[31:2]] <= wd;
+  assign data_mem_read_data = RAM[data_mem_address[31:2]];  // выравнивание 
+                             // по слову (деление на 4: PC / 4)
+  always_ff @(posedge clk) if (data_mem_write_enable) RAM[data_mem_address[31:2]] <= data_mem_write_data;
 endmodule

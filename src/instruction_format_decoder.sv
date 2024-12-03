@@ -1,6 +1,7 @@
-module instruction_decoder (
+module instruction_format_decoder (
     input logic [31:0] Instr,
     input instr_type_enum instr_type_enum_inst,
+    output logic [6:0] opcode,
     output logic [4:0] rd,
     output logic [2:0] funct3,
     output logic [4:0] rs1,
@@ -9,6 +10,7 @@ module instruction_decoder (
     output logic [31:0] imm
 );
 
+  assign opcode = Instr[6:0];
   assign funct3 = Instr[14:12];
   assign rd = Instr[11:7];
   assign rs1 = Instr[19:15];

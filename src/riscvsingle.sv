@@ -9,12 +9,12 @@ module riscvsingle (
     reset,
     output logic [31:0] PC,
     input logic [31:0] Instr,
-    output logic MemWrite,
+    output logic data_mem_write_enable,
     output logic [31:0] ALUResult,
-    WriteData,
-    input logic [31:0] ReadData
+    data_mem_write_data,
+    input logic [31:0] data_mem_read_data
 );
-  logic ALUSrc, RegWrite, Jump, Zero;
+  logic ALUSrc, write_enable_rd, Jump, Zero;
   logic [1:0] ResultSrc, ImmSrc;
   logic [2:0] ALUControl;
 
@@ -24,10 +24,10 @@ module riscvsingle (
       Instr,
       Zero,
       ResultSrc,
-      MemWrite,
+      data_mem_write_enable,
       PCSrc,
       ALUSrc,
-      RegWrite,
+      write_enable_rd,
       Jump,
       ImmSrc,
       ALUControl,
@@ -39,14 +39,14 @@ module riscvsingle (
       ResultSrc,
       PCSrc,
       ALUSrc,
-      RegWrite,
+      write_enable_rd,
       instr_type_enum_inst,
       ALUControl,
       Zero,
       PC,
       Instr,
       ALUResult,
-      WriteData,
-      ReadData
+      data_mem_write_data,
+      data_mem_read_data
   );
 endmodule

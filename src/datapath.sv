@@ -12,22 +12,23 @@ module datapath (
     input  logic           [ 1:0] ResultSrc,
     input  logic                  PCSrc,
     ALUSrc,
-    input  logic                  RegWrite,
+    input  logic                  write_enable_rd,
     input  instr_type_enum        instr_type_enum_inst,
     input  logic           [ 2:0] ALUControl,
     output logic                  Zero,
     output logic           [31:0] PC,
     input  logic           [31:0] Instr,
     output logic           [31:0] ALUResult,
-    WriteData,
-    input  logic           [31:0] ReadData
+    data_rs2,
+    input  logic           [31:0] data_mem_read_data
 );
 
   logic [31:0] PCNext, PCPlus4, PCTarget;
   logic [31:0] ImmExt;
-  logic [31:0] SrcA, SrcB;
-  logic [31:0] Result;
+  logic [31:0] data_rs1, SrcA, SrcB;
+  logic [31:0] write_data_rd;
 
+  assign SrcA = data_rs1;
   // логика PC
   flopr #(32) pcreg (
       clk,
@@ -54,13 +55,13 @@ module datapath (
   // логика регистрового файла
   regfile rf (
       clk,
-      RegWrite,
+      write_enable_rd,
       Instr[19:15],
       Instr[24:20],
       Instr[11:7],
-      Result,
-      SrcA,
-      WriteData
+      write_data_rd,
+      data_rs1,
+      data_rs2
   );
 
   extend ext (
@@ -70,7 +71,7 @@ module datapath (
   );
   // логика АЛУ
   mux2 #(32) srcbmux (
-      WriteData,
+      data_rs2,
       ImmExt,
       ALUSrc,
       SrcB
@@ -84,9 +85,9 @@ module datapath (
   );
   mux3 #(32) resultmux (
       ALUResult,
-      ReadData,
+      data_mem_read_data,
       PCPlus4,
       ResultSrc,
-      Result
+      write_data_rd
   );
 endmodule

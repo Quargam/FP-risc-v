@@ -1,16 +1,16 @@
 module maindec (
     input logic [6:0] op,
     output logic [1:0] ResultSrc,
-    output logic MemWrite,
+    output logic data_mem_write_enable,
     output logic Branch,
     ALUSrc,
-    output logic RegWrite,
+    output logic write_enable_rd,
     Jump,
     output logic [1:0] ImmSrc,
     output logic [1:0] ALUOp
 );
   logic [10:0] controls;
-  assign {RegWrite, ImmSrc, ALUSrc, MemWrite, ResultSrc, Branch, ALUOp, Jump} = controls;
+  assign {write_enable_rd, ImmSrc, ALUSrc, data_mem_write_enable, ResultSrc, Branch, ALUOp, Jump} = controls;
   always_comb
     case (op)
       7'b0000011: controls = 11'b1_00_1_0_01_0_00_0;  // lw
