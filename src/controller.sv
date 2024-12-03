@@ -13,10 +13,8 @@ module controller (
     output logic write_enable_rd,
     Jump,
     output logic [1:0] ImmSrc,
-    output logic [6:0] opcode,
-    output logic [2:0] funct3,
-    output logic [6:0] funct7,
-    output instr_type_enum instr_type_enum_inst
+    output instr_type_enum instr_type_enum_inst,
+    output fields_instr fields_instr_inst
 );
   logic [1:0] ALUOp;
   logic Branch;
@@ -31,17 +29,11 @@ module controller (
   instruction_format_decoder ifd (
       Instr,
       instr_type_enum_inst,
-      opcode,
-      rd,
-      funct3,
-      rs1,
-      rs2,
-      funct7,
-      imm
+      fields_instr_inst
   );
 
   maindec md (
-      opcode,
+      fields_instr_inst.opcode,
       ResultSrc,
       data_mem_write_enable,
       Branch,

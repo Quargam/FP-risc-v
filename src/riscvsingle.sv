@@ -16,10 +16,7 @@ module riscvsingle (
 );
   logic ALUSrc, write_enable_rd, Jump, Zero;
   logic [1:0] ResultSrc, ImmSrc;
-      logic [6:0] opcode;
-  logic [2:0] funct3;
-  logic [6:0] funct7;
-
+  fields_instr fields_instr_inst;
   instr_type_enum instr_type_enum_inst;
 
   controller c (
@@ -32,10 +29,8 @@ module riscvsingle (
       write_enable_rd,
       Jump,
       ImmSrc,
-        opcode,
-        funct3,
-        funct7,
-      instr_type_enum_inst
+      instr_type_enum_inst,
+      fields_instr_inst
   );
   datapath dp (
       clk,
@@ -45,9 +40,7 @@ module riscvsingle (
       ALUSrc,
       write_enable_rd,
       instr_type_enum_inst,
-      opcode,
-        funct3,
-        funct7,
+      fields_instr_inst,
       Zero,
       PC,
       Instr,

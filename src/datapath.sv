@@ -14,9 +14,7 @@ module datapath (
     ALUSrc,
     input  logic                  write_enable_rd,
     input  instr_type_enum        instr_type_enum_inst,
-    input logic [6:0] opcode,
-    input logic [2:0] funct3,
-    input logic [6:0] funct7,
+    input  fields_instr           fields_instr_inst,
     output logic                  Zero,
     output logic           [31:0] PC,
     input  logic           [31:0] Instr,
@@ -81,9 +79,9 @@ module datapath (
   alu alu (
       SrcA,
       SrcB,
-opcode,
-funct3,
-funct7,
+      fields_instr_inst.opcode,
+      fields_instr_inst.funct3,
+      fields_instr_inst.funct7,
       ALUResult,
       Zero
   );
