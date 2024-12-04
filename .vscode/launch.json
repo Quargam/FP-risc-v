@@ -81,6 +81,17 @@
                 "--out",
                 "test/result/jal.hex"
             ]
+        },
+        {
+            "name": "risc_v_single: start_prog.hex",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "risc_v_single",
+                "start_prog.hex"
+            ]
         }
     ]
 }
