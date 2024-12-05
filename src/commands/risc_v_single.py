@@ -78,10 +78,7 @@ def exec_command(args: CommandArgument) -> None:
         )
     includes = [
         *["-I", "./riscvsingle/test"],
-        *[
-            "-I",
-            "./riscvsingle//src",
-        ],
+        *["-I", "./riscvsingle//src"],
     ]
     run_iverilog(
         "./riscvsingle/test/testbench_common.sv",
