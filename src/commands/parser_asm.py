@@ -13,15 +13,15 @@ class CommandArgument(typing.Protocol):
 
 def parse_arguments(arg_parser: argparse.ArgumentParser) -> None:
     arg_parser.add_argument(
-        dest='args',
-        metavar='SOURCE_FILE.asm',
+        dest="args",
+        metavar="SOURCE_FILE.asm",
         type=Path,
     )
     arg_parser.add_argument(
-        '--out',
-        dest='out',
-        metavar='FILE.hex',
-        default='out.hex',
+        "--out",
+        dest="out",
+        metavar="FILE.hex",
+        default="out.hex",
         type=Path,
     )
     arg_parser.set_defaults(command=exec_command)
@@ -33,7 +33,7 @@ def exec_command(args: CommandArgument) -> None:
             if not line or line.startswith("#"):
                 continue
             instr = parse_instruction(line)
-            out.write(instr.hex_format() + '\n')
+            out.write(instr.hex_format() + "\n")
 
 
 def parse_instruction(instr: str) -> BaseType:
@@ -42,53 +42,53 @@ def parse_instruction(instr: str) -> BaseType:
     if name_instr in RISC_V_INSTRUCTION_FORMATS:
         instr_formats = RISC_V_INSTRUCTION_FORMATS[name_instr]
         if instr_formats["fmt"] == "R" and len(instr) == 4:
-            return instr_formats['class'](
-                    opcode=int(instr_formats['opcode'], base=2),
-                    funct7=int(instr_formats['funct7'], base=2),
-                    rs2=register_to_address(instr[3]),
-                    rs1=register_to_address(instr[2]),
-                    funct3=int(instr_formats['funct3'], base=2),
-                    rd=register_to_address(instr[1]),
+            return instr_formats["class"](
+                opcode=int(instr_formats["opcode"], base=2),
+                funct7=int(instr_formats["funct7"], base=2),
+                rs2=register_to_address(instr[3]),
+                rs1=register_to_address(instr[2]),
+                funct3=int(instr_formats["funct3"], base=2),
+                rd=register_to_address(instr[1]),
             )
         elif instr_formats["fmt"] == "I" and len(instr) == 4:
-            return instr_formats['class'](
-                    opcode=int(instr_formats['opcode'], base=2),
-                    imm=int(instr[3]),
-                    rs1=register_to_address(instr[2]),
-                    funct3=int(instr_formats['funct3'], base=2),
-                    rd=register_to_address(instr[1]),
+            return instr_formats["class"](
+                opcode=int(instr_formats["opcode"], base=2),
+                imm=int(instr[3]),
+                rs1=register_to_address(instr[2]),
+                funct3=int(instr_formats["funct3"], base=2),
+                rd=register_to_address(instr[1]),
             )
         elif instr_formats["fmt"] == "S" and len(instr) == 3:
-            if '(' in instr[2]:
+            if "(" in instr[2]:
                 imm, rs1 = parser_offser_and_rs1(instr[2])
             else:
                 imm, rs1 = "0", instr[2]
-            return instr_formats['class'](
-                    opcode=int(instr_formats['opcode'], base=2),
-                    imm=int(imm),
-                    rs2=register_to_address(instr[1]),
-                    rs1=register_to_address(rs1),
-                    funct3=int(instr_formats['funct3'], base=2),
+            return instr_formats["class"](
+                opcode=int(instr_formats["opcode"], base=2),
+                imm=int(imm),
+                rs2=register_to_address(instr[1]),
+                rs1=register_to_address(rs1),
+                funct3=int(instr_formats["funct3"], base=2),
             )
         elif instr_formats["fmt"] == "B" and len(instr) == 4:
-            return instr_formats['class'](
-                    opcode=int(instr_formats['opcode'], base=2),
-                    imm=int(instr[3]),
-                    rs2=register_to_address(instr[2]),
-                    rs1=register_to_address(instr[1]),
-                    funct3=int(instr_formats['funct3'], base=2),
+            return instr_formats["class"](
+                opcode=int(instr_formats["opcode"], base=2),
+                imm=int(instr[3]),
+                rs2=register_to_address(instr[2]),
+                rs1=register_to_address(instr[1]),
+                funct3=int(instr_formats["funct3"], base=2),
             )
         elif instr_formats["fmt"] == "U" and len(instr) == 3:
-            return instr_formats['class'](
-                    opcode=int(instr_formats['opcode'], base=2),
-                    imm=int(instr[2]),
-                    rd=register_to_address(instr[1]),
+            return instr_formats["class"](
+                opcode=int(instr_formats["opcode"], base=2),
+                imm=int(instr[2]),
+                rd=register_to_address(instr[1]),
             )
         elif instr_formats["fmt"] == "J" and len(instr) == 3:
-            return instr_formats['class'](
-                    opcode=int(instr_formats['opcode'], base=2),
-                    imm=int(instr[2]),
-                    rd=register_to_address(instr[1]),
+            return instr_formats["class"](
+                opcode=int(instr_formats["opcode"], base=2),
+                imm=int(instr[2]),
+                rd=register_to_address(instr[1]),
             )
     else:
         raise ValueError(f"Unsupported instruction: {instr}")
@@ -115,4 +115,6 @@ def register_to_address(reg_name: str) -> int:
         else:
             raise ValueError("Номер регистра должен быть в диапазоне от 0 до 31.")
     else:
-        raise ValueError(f"Неверное имя регистра: {reg_name}. Ожидается формат 'xN', где N — целое число от 0 до 31.")
+        raise ValueError(
+            f"Неверное имя регистра: {reg_name}. Ожидается формат 'xN', где N — целое число от 0 до 31."
+        )

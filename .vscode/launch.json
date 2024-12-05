@@ -83,14 +83,17 @@
             ]
         },
         {
-            "name": "risc_v_single: start_prog.hex",
+            "name": "risc_v_single: addi.hex",
             "type": "debugpy",
             "request": "launch",
             "program": "./main.py",
             "console": "integratedTerminal",
             "args": [
                 "risc_v_single",
-                "start_prog.hex"
+                "test/result/addi.hex",
+                "--run-vvp",
+                "--run-gtkwave",
+                "--dump-register-x"
             ]
         }
     ]

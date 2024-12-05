@@ -19,7 +19,6 @@ module testbench ();
   initial begin
     // Настройка вывода VCD
 `ifdef SAVE_FILE_VCD
-$display(`SAVE_FILE_VCD);
     $dumpfile(`SAVE_FILE_VCD);  // Указание имени файла
 `else
     $dumpfile("./build/testbench.vcd");  // Указание имени файла
