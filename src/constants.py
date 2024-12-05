@@ -7,6 +7,7 @@ RISC_V_INSTRUCTION_FORMATS = {
     "sub": {"opcode": "0110011", "funct3": "000", "funct7": "0100000", "fmt": "R", "class": RType},
     "and": {"opcode": "0110011", "funct3": "111", "funct7": "0000000", "fmt": "R", "class": RType},
     "or": {"opcode": "0110011", "funct3": "110", "funct7": "0000000", "fmt": "R", "class": RType},
+    "ori": {"opcode": "0010011", "funct3": "110", "funct7": "0000000", "fmt": "I", "class": IType},
     "xor": {"opcode": "0110011", "funct3": "100", "funct7": "0000000", "fmt": "R", "class": RType},
     "slt": {"opcode": "0110011", "funct3": "010", "funct7": "0000000", "fmt": "R", "class": RType},
     "slli": {"opcode": "0010011", "funct3": "001", "funct7": "0000000", "fmt": "I", "class": IType},

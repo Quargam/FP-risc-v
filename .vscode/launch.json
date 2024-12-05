@@ -12,9 +12,9 @@
             "console": "integratedTerminal",
             "args": [
                 "parser_asm",
-                "test/data/add.asm",
+                "test/data/instr_asm/add.asm",
                 "--out",
-                "test/result/add.hex"
+                "test/data/instr_hex/add.hex"
             ]
         },
         {
@@ -25,9 +25,9 @@
             "console": "integratedTerminal",
             "args": [
                 "parser_asm",
-                "test/data/addi.asm",
+                "test/data/instr_asm/addi.asm",
                 "--out",
-                "test/result/addi.hex"
+                "test/data/instr_hex/addi.hex"
             ]
         },
         {
@@ -38,9 +38,9 @@
             "console": "integratedTerminal",
             "args": [
                 "parser_asm",
-                "test/data/sw.asm",
+                "test/data/instr_asm/sw.asm",
                 "--out",
-                "test/result/sw.hex"
+                "test/data/instr_hex/sw.hex"
             ]
         },
         {
@@ -51,9 +51,9 @@
             "console": "integratedTerminal",
             "args": [
                 "parser_asm",
-                "test/data/bne.asm",
+                "test/data/instr_asm/bne.asm",
                 "--out",
-                "test/result/bne.hex"
+                "test/data/instr_hex/bne.hex"
             ]
         },
         {
@@ -64,9 +64,9 @@
             "console": "integratedTerminal",
             "args": [
                 "parser_asm",
-                "test/data/lui.asm",
+                "test/data/instr_asm/lui.asm",
                 "--out",
-                "test/result/lui.hex"
+                "test/data/instr_hex/lui.hex"
             ]
         },
         {
@@ -77,9 +77,9 @@
             "console": "integratedTerminal",
             "args": [
                 "parser_asm",
-                "test/data/jal.asm",
+                "test/data/instr_asm/jal.asm",
                 "--out",
-                "test/result/jal.hex"
+                "test/data/instr_hex/jal.hex"
             ]
         },
         {
@@ -90,7 +90,7 @@
             "console": "integratedTerminal",
             "args": [
                 "risc_v_single",
-                "test/result/addi.hex",
+                "test/data/instr_hex/addi.hex",
                 "--run-vvp",
                 "--run-gtkwave",
                 "--dump-register-x"

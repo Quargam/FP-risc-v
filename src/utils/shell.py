@@ -13,4 +13,5 @@ def run_shell(args: typing.List[str]) -> None:
     if proc.returncode != 0:
         print("Error running iverilog:")
         print(stderr)
+        raise Exception
     print(stdout)

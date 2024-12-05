@@ -16,7 +16,7 @@ module regfile (
   // фронту тактового импульса (A3/WD3/WE3)
   // значение регистра 0 жестко привязано 
   // к значению 0
-  always_ff @(posedge clk) if (write_enable_rd) register_x[address_rd] <= write_data_rd;
+  always_ff @(posedge clk) if (write_enable_rd ) register_x[address_rd] <= write_data_rd;
   assign data_rs1 = (address_rs1 != 0) ? register_x[address_rs1] : 0;
   assign data_rs2 = (address_rs2 != 0) ? register_x[address_rs2] : 0;
 
