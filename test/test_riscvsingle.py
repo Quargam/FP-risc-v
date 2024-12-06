@@ -4,7 +4,7 @@ from pathlib import Path
 import typing
 
 
-from src.commands import risc_v_single
+from src.commands import riscv_processor
 from src.commands.parser_asm import parse_instruction
 
 
@@ -68,9 +68,9 @@ def run_risc_v_single(prog_path: str, register_x_path: str) -> None:
         "--run-vvp",
     ]
     arg_parser = argparse.ArgumentParser()
-    risc_v_single.parse_arguments(arg_parser)
+    riscv_processor.parse_arguments(arg_parser)
     args = arg_parser.parse_args(cmd_args)
-    risc_v_single.exec_command(args)
+    riscv_processor.exec_command(args)
 
 
 @pytest.mark.parametrize("name_prog, vals_reg_x", RISC_V_PROG_HEX)

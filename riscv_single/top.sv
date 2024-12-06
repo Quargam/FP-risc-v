@@ -1,4 +1,4 @@
-`include "../src/riscvsingle.sv"
+`include "riscvsingle.sv"
 `include "imem.sv"
 `include "dmem.sv"
 

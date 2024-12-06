@@ -5,7 +5,7 @@ import typing
 import sys
 
 
-from src.commands import parser_asm, risc_v_single
+from src.commands import parser_asm, riscv_processor
 
 
 def parse_arguments(cmd_args: typing.Optional[typing.List[str]]) -> argparse.Namespace:
@@ -14,8 +14,8 @@ def parse_arguments(cmd_args: typing.Optional[typing.List[str]]) -> argparse.Nam
     parser_asm.parse_arguments(subparsers.add_parser(
         'parser_asm',
     ))
-    risc_v_single.parse_arguments(subparsers.add_parser(
-        'risc_v_single',
+    riscv_processor.parse_arguments(subparsers.add_parser(
+        'riscv_processor',
     ))
     return arg_parser.parse_args(cmd_args)
 

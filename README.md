@@ -20,7 +20,7 @@
 
 # Описание
 
-В рамках задания был создан однотактный процессор `riscvsingle` с архитектурой RISC-V, окружение на Python для тестирования его функциональности, а также парсер для преобразования инструкций `asm` в `hex`.
+В рамках задания был создан однотактный `riscv_single` и конвейерный `riscv_pipeline` процессор с архитектурой RISC-V, окружение на Python для тестирования его функциональности, а также парсер для преобразования инструкций `asm` в `hex`.
 
 На выполнение работы потребовалось 1 день и 2 вечера.
 
@@ -38,7 +38,7 @@
 ## Как запустить
 
 ### Установка
-1. Установите Python версии 3.8 или выше.
+1. Установите Python версии 3.8 или выше;
 2. Установите Icarus Verilog и добавьте исполняемые файлы в `PATH`. В состав Icarus Verilog входят утилиты **vvp** и **gtkwave**.
 
 ---
@@ -49,7 +49,14 @@
 
 ```bash
 mkdir build
-iverilog -g2012 -I ./riscvsingle/test -I ./riscvsingle/src -o ./build/testbench.vvp ./riscvsingle/test/testbench_common.sv
+iverilog -g2012 -I ./riscv_single -o ./build/testbench.vvp ./riscvsingle/testbench.sv
+vvp ./build/testbench.vvp
+gtkwave build/testbench.vcd
+```
+или
+```bash
+mkdir build
+iverilog -g2012 -I ./riscv_pipeline -o ./build/testbench.vvp ./riscv_pipeline/testbench.sv
 vvp ./build/testbench.vvp
 gtkwave build/testbench.vcd
 ```
@@ -59,7 +66,7 @@ gtkwave build/testbench.vcd
 ### Запуск с Python
 
 Python-окружение состоит из двух частей:
-1. Компиляция и симуляция кода на Verilog.
+1. Компиляция и симуляция кода на Verilog;
 2. Парсер, преобразующий инструкции `ASM RV32I` в `HEX`.
 
 Чтобы узнать больше, выполните:
@@ -87,7 +94,7 @@ options:
 
 ### Тесты
 
-Основной тест симуляции находится в файле `./riscvsingle/test/testbench_common.sv` и проверяет корректность работы процессора.
+Основной тест симуляции находится в файле `./riscvsingle/testbench.sv` и проверяет корректность работы процессора.
 
 Для запуска тестов на основе `pytest` выполните следующие команды:
 
@@ -102,13 +109,13 @@ pytest
 
 ---
 
-### Запуск процессора (`riscvsingle`)
+### Запуск процессора
 
 ```bash
-usage: main.py risc_v_single [-h] [--out-vvp FILE.vvp] [--out-vcd FILE.vcd] [--dump-data-mem [DUMP_DATA_MEM]] [--dump-register-x [DUMP_REGISTER_X]] [--run-vvp] [--run-gtkwave] SOURCE_FILE.hex
+usage: main.py riscv_processor [-h] [--out-vvp FILE.vvp] [--out-vcd FILE.vcd] [--dump-data-mem [DUMP_DATA_MEM]] [--dump-register-x [DUMP_REGISTER_X]] [--run-vvp] [--run-gtkwave] [--processor-type {riscv_single,riscv_pipeline}] SOURCE_FILE.hex
 
 positional arguments:
-  SOURCE_FILE.hex          Входной файл в формате HEX.
+  SOURCE_FILE.hex
 
 options:
   -h, --help            show this help message and exit
@@ -118,20 +125,23 @@ options:
   --dump-register-x [DUMP_REGISTER_X]
   --run-vvp
   --run-gtkwave
+  --processor-type {riscv_single,riscv_pipeline}
 ```
 
 Описание аргументов:
-* `--out-vvp`: Путь для сохранения файла `.vvp`.
-* `--out-vcd`: Путь для сохранения файла `.vcd`.
-* `--dump-data-mem`: Путь для сохранения содержимого ОЗУ.
-* `--dump-register-x`: Путь для сохранения значений регистров.
-* `--run-vvp`: Запускает симуляцию через `vvp`.
-* `--run-gtkwave`: Открывает файл `.vcd` в `gtkwave`.
+* `SOURCE_FILE.hex`: Входной файл в формате HEX;
+* `--out-vvp`: Путь для сохранения файла `.vvp`;
+* `--out-vcd`: Путь для сохранения файла `.vcd`;
+* `--dump-data-mem`: Путь для сохранения содержимого ОЗУ;
+* `--dump-register-x`: Путь для сохранения значений регистров;
+* `--run-vvp`: Запускает симуляцию через `vvp`;
+* `--run-gtkwave`: Открывает файл `.vcd` в `gtkwave`;
+* `--processor-type`: Выбирает реализацию процессора (`single` или `pipeline`).
 
 ---
 
 ## Источники
 
-* **Рэндал Э. Брайант, Дэвид Р. О'Халларон. Компьютерные системы: архитектура и программирование** (3-е издание).
-* **Сара Л. Харрис, Дэвид Харрис. Цифровая схемотехника и архитектура компьютера: RISC-V**.
+* *Рэндал Э. Брайант, Дэвид Р. О'Халларон. Компьютерные системы: архитектура и программирование* (3-е издание);
+* *Сара Л. Харрис, Дэвид Харрис. Цифровая схемотехника и архитектура компьютера: RISC-V*;
 * *The RISC-V Instruction Set Manual. Volume I: User-Level ISA Document Version 2.2*.

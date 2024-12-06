@@ -12,6 +12,7 @@ class CommandArgument(typing.Protocol):
     dump_register_x: typing.Optional[str]
     run_vvp: bool
     run_gtkwave: bool
+    processor_type: str
 
 
 def parse_arguments(arg_parser: argparse.ArgumentParser) -> None:
@@ -60,6 +61,12 @@ def parse_arguments(arg_parser: argparse.ArgumentParser) -> None:
         dest="run_gtkwave",
         action="store_true",
     )
+    arg_parser.add_argument(
+        "--processor-type",
+        dest="processor_type",
+        choices=["riscv_single", "riscv_pipeline"],
+        default="riscv_single",
+    )
     arg_parser.set_defaults(command=exec_command)
 
 
@@ -77,11 +84,10 @@ def exec_command(args: CommandArgument) -> None:
             form_arg_directive_cli("-D", "REGISTER_MEM_FILE_HEX", args.dump_register_x)
         )
     includes = [
-        *["-I", "./riscvsingle/test"],
-        *["-I", "./riscvsingle//src"],
+        *["-I", f"./{args.processor_type}"],
     ]
     run_iverilog(
-        "./riscvsingle/test/testbench_common.sv",
+        f"./{args.processor_type}/testbench.sv",
         args.out_vvp,
         defines,
         includes,

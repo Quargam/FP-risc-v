@@ -83,6 +83,20 @@
             ]
         },
         {
+            "name": "risc_v_single: single",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "risc_v_single",
+                "riscv_single/riscvtest.txt",
+                "--run-vvp",
+                "--run-gtkwave",
+                "--dump-register-x"
+            ]
+        },
+        {
             "name": "risc_v_single: addi.hex",
             "type": "debugpy",
             "request": "launch",
@@ -94,6 +108,22 @@
                 "--run-vvp",
                 "--run-gtkwave",
                 "--dump-register-x"
+            ]
+        },
+        {
+            "name": "risc_v_single: pipeline",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "./main.py",
+            "console": "integratedTerminal",
+            "args": [
+                "risc_v_single",
+                "riscv_pipeline/SampleProgram.hex",
+                "--run-vvp",
+                "--run-gtkwave",
+                "--dump-register-x",
+                "--processor-type",
+                "riscv_pipeline"
             ]
         }
     ]
